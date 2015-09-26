@@ -23,7 +23,7 @@ var TaskView = Backbone.View.extend({
 
 	},
 	initialize: function () {   //must be called initialize!
-		this.listenTo(this.collection, 'add', this.render());
+		this.listenTo(this.collection, 'add', this.render);
 			//this.model.on("change", this.render, this);
 			// last argument 'this' ensures that render's
 			// 'this' means the view, not the model
@@ -56,10 +56,6 @@ var CreateTaskView = Backbone.View.extend({
 		 							"Description" + "<br><div>" + descrInput + "</div>" +
 									"<br><div>" + saveBtn + "</div>");
 	},
-	initialize: function () {
-			//this.model.on("change", this.render, this);
-			//this.listenTo(this.collection, 'add', this.addView);
-	},
 	events: {
 		//when click Save button, run save function.
 			"click #saveBtn" : "save"
@@ -76,9 +72,7 @@ var CreateTaskView = Backbone.View.extend({
 		 if(activeUser) {
 			 this.collection.add({title: titleStr, description: descrStr,
 			 creator: activeUser.get("username")});
-		 } else {
-		 this.collection.add({title: titleStr, description: descrStr});
-	 	}
+		 }
 		//clear text box
 		$("#title").val('');
 		$("#description").val('');
@@ -100,7 +94,8 @@ var UnassignedTasksView = Backbone.View.extend({
 		var currentStatus = newModel.get("status");
 		if (currentStatus === "Unassigned") {
 			var view = new TaskView({model: newModel, collection: app.users});
-			this.$el.append(view.$el);
+			view.render();
+			$("#unassignedTasks").append(view.$el);
 		}
 	},
 
@@ -114,8 +109,6 @@ var UserTasksView = Backbone.View.extend({
 	//Something is resetting this property...
 	hasUnassignedTasksView: false,
 	render: function(caller) {
-		console.log("UserTasksView.render called by " + caller + "!");
-		console.log(this.hasUnassignedTasksView);
 		$("#userTasks").html("<p>Tasks for " + this.model.get("username") +
 		":</p>");
 		//Get all the tasks associated with a user
@@ -131,25 +124,8 @@ var UserTasksView = Backbone.View.extend({
 		if (userCreatedTasks.length === 0 && userAssignedTasks.length === 0) {
 			$("#userTasks").append("<p>You currently have no tasks.</p>");
 		}
-		if(this.hasUnassignedTasksView === false){
-			var unassignedTasksView = new UnassignedTasksView({
-				model: activeUser, collection: app.tasks
-			});
-		unassignedTasksView.render();
-		$('#unassignedTasks').append(unassignedTasksView.$el);
-		this.hasUnassignedTasksView = true;
-		console.log("Creating new unassignedTasksView");
-		console.log(this.hasUnassignedTasksView);
-		}
+
 	},
-	/*belongsToUser: function(task) {
-		console.log(task.get("creator"), task.get("assignee"));
-		if(task.get("creator") === activeUser.get("username") ||
-		task.get("assignee") === activeUser.get("username") ) {
-			console.log(task.get("creator") === activeUser.get("username"));
-			this.userTasksCollection.add(task);
-		}
-	}, */
 
 	// THIS NEEDS WORK. Right now I'm cheating and displaying some data from
 	// the array of tasks I got above in this.render
@@ -158,21 +134,15 @@ var UserTasksView = Backbone.View.extend({
 	appendNew: function(newTask) {
 		$("#userTasks").append("<p>Title: "+newTask.get("title")+"</p>" +
 	"<p>Creator:" + newTask.get("creator")+"</p>");
-		/*if(newTask.get("status") === "Unassigned") {
-			$("#userTasks").append("<p>Assignee: Unassigned</p>");
-		} else if(newTask.get("status") === "Assigned") {
-			$("#userTasks").append("<p>Assignee: "+newTask.get("assignee")+"</p>");
-		} // Don't need to worry about this right now */
 	},
 	reRender: function(caller) {
 		this.$el.html('');
-		console.log("UserTasksView.reRender called by " + caller + "!");
 		this.render("reRender");
 	},
 	initialize: function() {
 		//Whenever a new model is added to the collection, check if it
 		//was created by or assigned to the active user.
-		this.listenTo(this.collection, "add", this.reRender("UserTasksView.initialize for collection add"));
+		this.listenTo(this.collection, "add", this.reRender);
 		this.listenTo($("#logOut"), "click", this.remove);
 		//Right now I can't get it to update the assignee, but eventually I need
 		// to get it to display actual TaskViews, so I'm not worrying about it now
@@ -182,11 +152,15 @@ var UserTasksView = Backbone.View.extend({
 var UserView = Backbone.View.extend({
 	hasView: false,
 
-	render: function() {
-		console.log("UserView.render called!");
+	render: function(caller) {
 		this.$el.html("<p>Welcome, "+this.model.get('username')+"</p>"+
 		"<button id='logOut'>Log Out</button>");
-		if (this.collection.length !== 0 && this.hasView === false)	this.addView();
+		//this starts process - creates CreateTasksView with a TaskCollection (which has TaskModel in it)
+		createTaskView = new CreateTaskView({collection: app.tasks, model: activeUser});
+		//immediately runs the render function in CreateasksView (which just shows the 'Create New Task' button)
+		createTaskView.render();
+		$("#createTasks").append(createTaskView.$el);
+		if (this.collection.length !== 0 && this.hasView === false)	this.addView("UserView.render");
 
 	},
 	/*initialize: function() {
@@ -200,11 +174,11 @@ var UserView = Backbone.View.extend({
 			this.addView();
 		}
 	}, */
-	addView: function() {
+	addView: function(caller) {
 		if(this.hasView === false) {
 			var userTasksView = new UserTasksView({model: activeUser, collection: app.tasks,
 			userTasksCollection: this.collection});
-			userTasksView.render();
+			userTasksView.render("UserView.render");
 			$("#userTasks").append(userTasksView.$el);
 			this.hasView = true;
 		}
@@ -278,16 +252,16 @@ var LoginView = Backbone.View.extend({
 		//Create a new UserView and UserTasksView to replace the LoginView
 		var userTasksCollection = new UserTasksCollection({user: activeUser});
 		var userView = new UserView({model: user, collection: userTasksCollection});
-		userView.render();
-		//this starts process - creates CreateTasksView with a TaskCollection (which has TaskModel in it)
-		createTaskView = new CreateTaskView({collection: app.tasks, model: activeUser});
-		//immediately runs the render function in CreateasksView (which just shows the 'Create New Task' button)
-		createTaskView.render();
-		$("#createTasks").append(createTaskView.$el);
-		var userTasksView = new UserTasksView({model: user, collection: app.tasks});
-		userTasksView.render();
-		$("#userTasks").append(userTasksView.$el);
+		userView.render("grantAccess");
+	/*	var userTasksView = new UserTasksView({model: user, collection: app.tasks});
+		userTasksView.render("grantAccess");
+		$("#userTasks").append(userTasksView.$el);*/
 		$("#welcome").append(userView.$el);
+
+		var unassignedTasksView = new UnassignedTasksView({
+			model: activeUser, collection: app.tasks
+		});
+
 		this.remove();
 	}
 });
