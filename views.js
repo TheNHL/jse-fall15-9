@@ -23,7 +23,11 @@ var TaskView = Backbone.View.extend({
 
 	},
 	initialize: function () {   //must be called initialize!
+<<<<<<< HEAD
 		this.listenTo(this.collection, 'add', this.render());
+=======
+		//this.listenTo(this.collection, 'add', this.render);
+>>>>>>> Assignment
 			//this.model.on("change", this.render, this);
 			// last argument 'this' ensures that render's
 			// 'this' means the view, not the model
@@ -37,8 +41,20 @@ var TaskView = Backbone.View.extend({
  	},
 	assign: function() {
 		var newAssignee = $("#newAssignee").val();
-		this.model.set("assignee", newAssignee);
+		app.tasks.add({
+			assignee: newAssignee, status: "Assigned",
+			description: this.model.get("description"),
+			creator: this.model.get("creator"),
+			title: this.model.get("title")
+		});
+		app.tasks.remove(this.model);
+		/*this.model.set("assignee", newAssignee);
 		this.model.set("status", "Assigned");
+		console.log(app.tasks.length);
+		app.tasks.remove(this.model);
+		console.log(app.tasks.length); */
+		this.remove();
+
 	}
  });
 var CreateTaskView = Backbone.View.extend({
@@ -111,7 +127,8 @@ var UnassignedTasksView = Backbone.View.extend({
 });
 
 var UserTasksView = Backbone.View.extend({
-	render: function(caller) {
+	render: function() {
+		this.$el.html('')
 		$("#userTasks").html("<p>Tasks for " + this.model.get("username") +
 		":</p>");
 		//Get all the tasks associated with a user
@@ -122,7 +139,7 @@ var UserTasksView = Backbone.View.extend({
 			userCreatedTasks.forEach(this.appendNew, this);
 		}
 		if (userAssignedTasks.length !== 0) {
-			userCreatedTasks.forEach(this.appendNew, this);
+			userAssignedTasks.forEach(this.appendNew, this);
 		}
 		if (userCreatedTasks.length === 0 && userAssignedTasks.length === 0) {
 			$("#userTasks").append("<p>You currently have no tasks.</p>");
@@ -142,24 +159,24 @@ var UserTasksView = Backbone.View.extend({
 	//Eventually I need to make this display the proper TaskViews!
 
 	appendNew: function(newTask) {
-		$("#userTasks").append("<p>Title: "+newTask.get("title")+"</p>" +
-	"<p>Creator:" + newTask.get("creator")+"</p>");
-		/*if(newTask.get("status") === "Unassigned") {
-			$("#userTasks").append("<p>Assignee: Unassigned</p>");
-		} else if(newTask.get("status") === "Assigned") {
-			$("#userTasks").append("<p>Assignee: "+newTask.get("assignee")+"</p>");
-		} // Don't need to worry about this right now */
+		this.activeTask = newTask;
+		console.log(this.activeTask.get("title"));
+		var newUserTask = new TaskView({model: newTask, collection: app.tasks});
+		newUserTask.render();
+		$("#userTasks").append(newUserTask.$el);
 	},
-	reRender: function() {
+	/*reRender: function() {
 		this.$el.html('');
-		this.render('reRender');
-	},
+		this.render();
+	}, */
 	initialize: function() {
 		//Whenever a new model is added to the collection, check if it
 		//was created by or assigned to the active user.
-		this.listenTo(this.collection, "add", this.reRender);
-		//Right now I can't get it to update the assignee, but eventually I need
-		// to get it to display actual TaskViews, so I'm not worrying about it now
+		this.listenTo(this.collection, "add", this.render);
+		this.listenTo(this.collection, "remove", this.render);
+	},
+	events: {
+	//	"#assignBtn click" : "render"
 	}
 });
 
