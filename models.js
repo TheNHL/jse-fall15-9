@@ -16,11 +16,13 @@ var TaskModel = Backbone.Model.extend({
 })
 
 var UserCollection = Backbone.Collection.extend({
-	model:UserModel
+	model:UserModel,
+	url:'/users'
 })
 
 var TaskCollection = Backbone.Collection.extend({
-	model:TaskModel
+	model:TaskModel,
+	url:'/tasks'
 })
 
 var UserTasksCollection = Backbone.Collection.extend({
