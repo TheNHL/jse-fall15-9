@@ -123,6 +123,7 @@ var UnassignedTasksView = Backbone.View.extend({
 });
 
 var UserTasksView = Backbone.View.extend({
+
 	render: function() {
 		this.$el.html('')
 		$("#userTasks").html("<p>Tasks for " + this.model.get("username") +
@@ -232,6 +233,12 @@ var UserView = Backbone.View.extend({
 
 });
 
+// jquery add text if username/ pword Incorrect
+// remove when click log in button (click or enter)
+// stop direct to text "incorrect"
+//clear input field (make empty string)
+// selector for text color
+
 var LoginView = Backbone.View.extend({
 	render: function() {
 		var loginBtn = "<button id='loginBtn'>Log In</button>";
@@ -252,21 +259,27 @@ var LoginView = Backbone.View.extend({
 		var userInput = $("#userInput").val(); //Grab the user input
 		var passInput = $("#passInput").val();
 
-		//Check to see if there's a user with given username
-		//If not, tell us. If so, see if the passwords match
-		//Then load a UserView!
-		// Could we add a "try again" or "return" button when it redirects us to "username does not match any registered users"
 		if(!this.collection.findWhere({username: userInput})) {
-			this.$el.html("<p class='hideSoon'>Username " + userInput +
-			//In the future I want to hide these 'hidesoon's after a while
-			" does not match any registered users.</p>");
+				$("<p id='wrongUsername'>Incorrect Username </p>").appendTo("#login");
+				$("#userInput").val('');
+				$("#passInput").val('');
+				$( "#userInput" ).click(function() {
+					$( "#wrongUsername" ).remove();
+				});
 		} else {
 			var user = this.collection.findWhere({username: userInput});
 		}
 		if (user.get("password") === passInput) {
 			this.grantAccess(user);		//This will load the UserView.
-		} else this.$el.html("<p class='hideSoon'>Incorrect password.</p>");
+		} else
+			$("<p id='wrongPassword'>Incorrect Password</p>").appendTo("#login");
+			$("#passInput").val('');
+			$( "#passInput" ).click(function() {
+				$( "#wrongPassword" ).remove();
+			});
 	},
+
+// perhaps add specific "if username AND password are incorrect" ?
 
 	grantAccess : function(user) {
 		//First set the active user to be the user that just logged in

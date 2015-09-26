@@ -10,6 +10,10 @@ body {
   margin: 1%;
 }
 
+#app {
+  width: 50%;
+}
+
 input {
   display: block;
   margin-bottom: 2%;
@@ -86,6 +90,51 @@ input {
 /* User View (top of pagewelcome, log out)*/
 
 
+/* END login */
+
+
+
+#div {
+  width: 60%;
+  display: block;
+  margin-top: 25%;
+  padding-top: 10px;
+}
+
+#app {
+  width: 60%;
+  display: block;
+  margin-top: 3%;
+  padding-top: 10px;
+}
+
+#wrongPassword {
+  color: red;
+}
+
+#wrongUsername {
+  color: red;
+}
+#welcome {
+  float: top;
+  width: 90%;
+/*  height:inherit;
+  padding: 0px auto;
+  position: fixed;
+  top: 10px;
+  z-index: 2; */
+}
+
+
+
+/* User View (top of pagewelcome, log out)*/
+
+
+
+/* User Tasks View */
+#createTasks {
+
+}
 
 /* User Tasks View */
 #createTasks {
@@ -111,9 +160,6 @@ input {
   padding: 1%;
   margin-top: 10%;
 }
-
-
-
 
 /* Create Task View */
 
@@ -150,6 +196,9 @@ input {
 
 /* Buttons ahoy! */
 
+/* Buttons */
+
+
 button {
   padding: 5px 10px;
   background-color: #ccc;
@@ -168,7 +217,7 @@ button:hover {
 
 
 #loginBtn {
-  margin-bottom: 7%;
+  margin-bottom: 2%;
 }
 
 
@@ -185,7 +234,6 @@ button:hover {
   margin-bottom: 7%;
 }
 
-
 #clearBtn {
   margin-bottom: 7%;
 }
@@ -193,18 +241,6 @@ button:hover {
 #assignBtn {
 
 }
-
-
-/*
-space between task/assign to user and tasks for person 1
-
-user;s as tasks at the top?
-
-*/
-
-
-
-
 
 /*
 
