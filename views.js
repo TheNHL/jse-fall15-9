@@ -101,7 +101,6 @@ var CreateTaskView = Backbone.View.extend({
 var UnassignedTasksView = Backbone.View.extend({
 	//render function runs immediately which is just putting the 'Create New Task' button in a div called 'task-list' inside the app div
 	render: function() {
-
 	},
   //this listens for a collection to be added (which happens when addModel is called by clicking the 'Create New Task' button) and then calls addView
 	initialize: function () {
@@ -112,6 +111,7 @@ var UnassignedTasksView = Backbone.View.extend({
 		var currentStatus = newModel.get("status");
 		if (currentStatus === "Unassigned") {
 			var view = new TaskView({model: newModel, collection: app.users});
+			view.render();
 			this.$el.append(view.$el);
 		}
 	},
@@ -286,6 +286,10 @@ var LoginView = Backbone.View.extend({
 		$("#userTasks").append(userTasksView.$el);
 		console.log('UserTasksView should be up!');
 		$("#welcome").append(userView.$el);
+		unassignedTasksView = new UnassignedTasksView({collection: app.tasks});
+		unassignedTasksView.render();
+		$('#unassignedTasks').append(unassignedTasksView.$el);
+
 		this.remove();
 	}
 });
@@ -307,9 +311,6 @@ function GUI(users, tasks, el) {
 	$("#login").append(loginView.$el);
 
 
-	unassignedTasksView = new UnassignedTasksView({collection: app.tasks});
-	unassignedTasksView.render();
-	$('#unassignedTasks').append(unassignedTasksView.$el);
 }
 return GUI;
 
