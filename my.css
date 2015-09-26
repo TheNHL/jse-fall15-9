@@ -8,12 +8,10 @@ body {
   font-weight: 300;
   letter-spacing: 0.75px;
   margin: 1%;
-  margin: 10px;
 }
 
 #app {
   width: 50%;
-
 }
 
 input {
@@ -59,6 +57,38 @@ input {
 #passInput {
   width: 125px;
 }
+/* END login */
+
+
+
+#div {
+  width: 60%;
+  display: block;
+  margin-top: 25%;
+  padding-top: 10px;
+}
+
+#app {
+  width: 60%;
+  display: block;
+  margin-top: 3%;
+  padding-top: 10px;
+}
+
+#welcome {
+  float: top;
+  width: 90%;
+/*  height:inherit;
+  padding: 0px auto;
+  position: fixed;
+  top: 10px;
+  z-index: 2; */
+}
+
+
+
+/* User View (top of pagewelcome, log out)*/
+
 
 /* END login */
 
@@ -106,13 +136,17 @@ input {
 
 }
 
-/* User View */
 /* User Tasks View */
+#createTasks {
+
+}
+
 /* Unassigned Task View */
 /* Task View */
 
 #task-list {
   padding-bottom: 5%;
+
 }
 
 
@@ -127,11 +161,6 @@ input {
   margin-top: 10%;
 }
 
-
-
-}
-
-
 /* Create Task View */
 
 /* title text area*/
@@ -141,9 +170,11 @@ input {
   width: 175px;
   font-weight: 300;
   letter-spacing: 0.5px;
-
+  margin-bottom: 2%;
+  margin-top: 1%;
 }
 
+  /* task description text area*/
 #description {
   font-family: Helvetica;
   font-size: 12px;
@@ -152,13 +183,14 @@ input {
   width: 200px;
   height: 100px;
   padding: 5px;
+  margin-bottom: 2%;
+  margin-top: 1%;
   border-radius: 3px;
   border-top: #777 1px solid;
   border-right: #777 1px solid;
   border-bottom: #999 1px solid;
   border-left: #999 1px solid;
 }
-
 
 /* END of Create Task View */
 
@@ -203,14 +235,12 @@ button:hover {
 }
 
 #clearBtn {
+  margin-bottom: 7%;
 }
 
 #assignBtn {
 
 }
-/*
-
-*/
 
 /*
 
