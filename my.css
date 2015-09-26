@@ -7,11 +7,7 @@ body {
   font-size: 14px;
   font-weight: 300;
   letter-spacing: 0.75px;
-  margin: 10px;
-}
-
-#app {
-  width: 50%;
+  margin: 1%;
 }
 
 input {
@@ -28,12 +24,13 @@ input {
   font-size: 12px;
 }
 
-
+::-webkit-scrollbar {
+    display: none;
+}
 /* Login View */
 
 #login {
   width: auto;
-  margin-bottom: 30px;
 }
 
  h2 {
@@ -56,29 +53,82 @@ input {
 #passInput {
   width: 125px;
 }
+/* END login */
 
 
-/* User View */
+
+#div {
+  width: 60%;
+  display: block;
+  margin-top: 25%;
+  padding-top: 10px;
+}
+
+#app {
+  width: 60%;
+  display: block;
+  margin-top: 3%;
+  padding-top: 10px;
+}
+
+#welcome {
+  float: top;
+  width: 90%;
+/*  height:inherit;
+  padding: 0px auto;
+  position: fixed;
+  top: 10px;
+  z-index: 2; */
+}
+
+
+
+/* User View (top of pagewelcome, log out)*/
+
+
+
 /* User Tasks View */
+#createTasks {
+
+}
+
 /* Unassigned Task View */
 /* Task View */
 
 #task-list {
   padding-bottom: 5%;
+
 }
+
+
+/* task title, description, added by, status, input field, assign to user button */
+#unassignedTasks {
+
+}
+
+/* Tasks for (Username) */
+#userTasks {
+  padding: 1%;
+  margin-top: 10%;
+}
+
+
 
 
 /* Create Task View */
 
+/* title text area*/
 #title {
   font-family: Helvetica;
   font-size: 13px;
   width: 175px;
   font-weight: 300;
   letter-spacing: 0.5px;
-
+  margin-bottom: 2%;
+  margin-top: 1%;
 }
 
+  /* task description text area*/
 #description {
   font-family: Helvetica;
   font-size: 12px;
@@ -87,6 +137,8 @@ input {
   width: 200px;
   height: 100px;
   padding: 5px;
+  margin-bottom: 2%;
+  margin-top: 1%;
   border-radius: 3px;
   border-top: #777 1px solid;
   border-right: #777 1px solid;
@@ -94,7 +146,9 @@ input {
   border-left: #999 1px solid;
 }
 
-/* Buttons */
+/* END of Create Task View */
+
+/* Buttons ahoy! */
 
 button {
   padding: 5px 10px;
@@ -119,6 +173,7 @@ button:hover {
 
 
 #logOut {
+
 }
 
 
@@ -132,17 +187,26 @@ button:hover {
 
 
 #clearBtn {
+  margin-bottom: 7%;
 }
+
+#assignBtn {
+
+}
+
+
+/*
+space between task/assign to user and tasks for person 1
+
+user;s as tasks at the top?
+
+*/
+
 
 
 
 
 /*
-Task Statuses...?
-
-#unassigned {
-
-}
 
 #assigned {
 
