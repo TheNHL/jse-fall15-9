@@ -23,11 +23,7 @@ var TaskView = Backbone.View.extend({
 
 	},
 	initialize: function () {   //must be called initialize!
-<<<<<<< HEAD
-		this.listenTo(this.collection, 'add', this.render());
-=======
-		//this.listenTo(this.collection, 'add', this.render);
->>>>>>> Assignment
+			//this.listenTo(this.collection, 'add', this.render);
 			//this.model.on("change", this.render, this);
 			// last argument 'this' ensures that render's
 			// 'this' means the view, not the model
