@@ -64,7 +64,7 @@ var CreateTaskView = Backbone.View.extend({
 	  var titleInput = '<input id= "title" type="text" value="" />';
 		var descrInput = '<textarea id= "description"></textarea>';
 		//append text input titles, text input fields, and save button into a div into task-list
-		this.$el.html("Task Title" + "<div>" + titleInput + "</div>" +
+		this.$el.html("<p class='makeTask'>Create A Task</p>" + "Task Title" + "<div>" + titleInput + "</div>" +
 		 							"Description" + "<br><div>" + descrInput + "</div>" +
 									"<br><div>" + saveBtn + "</div>");
 	},
@@ -126,7 +126,7 @@ var UserTasksView = Backbone.View.extend({
 
 	render: function() {
 		this.$el.html('')
-		$("#userTasks").html("<p>Tasks for " + this.model.get("username") +
+		$("#userTasks").html("<p class= 'yrTasks'>Tasks for " + this.model.get("username") +
 		":</p>");
 		//Get all the tasks associated with a user
 		var userCreatedTasks = this.collection.where({creator: activeUser.get("username")});
@@ -181,8 +181,7 @@ var UserView = Backbone.View.extend({
 	hasView: false,
 
 	render: function() {
-		this.$el.html("<p>Welcome, "+this.model.get('username')+"</p>"+
-		"<button id='logOut'>Log Out</button>");
+		this.$el.html("<p>Welcome, "+this.model.get('username'   )+ "        " + "<button id='logOut'>Log Out</button>");
 		if (this.collection.length !== 0 && this.hasView === false)	this.addView();
 
 	},

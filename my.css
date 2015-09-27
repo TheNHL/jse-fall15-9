@@ -7,12 +7,14 @@ body {
   font-size: 14px;
   font-weight: 300;
   letter-spacing: 0.75px;
-  margin: 1%;
+  margin-left: 3%;
 }
 
 #app {
-  width: 50%;
+  display: block;
+
 }
+
 
 input {
   display: block;
@@ -34,11 +36,14 @@ input {
 /* Login View */
 
 #login {
-  width: auto;
+  width: 20%;
+  margin: 5%;
+  padding: 5%;
+  border: pink 1px solid;
 }
 
  h2 {
-   font-family: Futura;
+   font-family: Futura, Helvetica;
    font-size: 18px;
    font-weight: 300;
    text-transform: uppercase;
@@ -57,113 +62,95 @@ input {
 #passInput {
   width: 125px;
 }
+
+
+#wrongPassword, #wrongUsername {
+  color: red;
+}
+
 /* END login */
 
-
-
-#div {
-  width: 60%;
-  display: block;
-  margin-top: 25%;
-  padding-top: 10px;
-}
-
-#app {
-  width: 60%;
-  display: block;
-  margin-top: 3%;
-  padding-top: 10px;
-}
+/* User View (top of pagewelcome, log out)*/
 
 #welcome {
-  float: top;
-  width: 90%;
-/*  height:inherit;
-  padding: 0px auto;
+  padding-bottom: 10px;
+  margin: 5px;
+  padding: 1%;
   position: fixed;
-  top: 10px;
-  z-index: 2; */
+  text-align: center;
+  top: 0;
+  right: 0;
+  width: 30%;
+  display: block;
+  border: lightblue 1px solid;
 }
 
 
 
 /* User View (top of pagewelcome, log out)*/
 
-
-/* END login */
-
-
-
-#div {
-  width: 60%;
-  display: block;
-  margin-top: 25%;
-  padding-top: 10px;
-}
-
-#app {
-  width: 60%;
-  display: block;
-  margin-top: 3%;
-  padding-top: 10px;
-}
-
-#wrongPassword {
-  color: red;
-}
-
-#wrongUsername {
-  color: red;
-}
-#welcome {
-  float: top;
-  width: 90%;
-/*  height:inherit;
-  padding: 0px auto;
-  position: fixed;
-  top: 10px;
-  z-index: 2; */
-}
-
-
-
-/* User View (top of pagewelcome, log out)*/
-
-
-
 /* User Tasks View */
 #createTasks {
-
+  width: 20%;
+  margin: 5%;
+  padding: 5%;
+  margin-right: 10px;
+  postion: fixed;
+  border: green 1px solid;
 }
 
-/* User Tasks View */
-#createTasks {
-
-}
 
 /* Unassigned Task View */
 /* Task View */
 
 #task-list {
+  width: 20%;
+  margin: 5%;
+  padding: 5%;
   padding-bottom: 5%;
+  border: orange 1px solid;
 
 }
 
 
-/* task title, description, added by, status, input field, assign to user button */
 #unassignedTasks {
+  width: 20%;
+  margin: 5%;
+  padding: 5%;
+  border: purple 1px solid;
+}
 
+h4 {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
 }
 
 /* Tasks for (Username) */
 #userTasks {
-  padding: 1%;
-  margin-top: 10%;
+  margin: 5%;
+  width: 20%;
+  padding: 5%;
+  margin-bottom: 5%;
+  float: bottom;
+  border: red 1px solid;
+
 }
+
+.yrTasks {
+  font-family: Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
 
 /* Create Task View */
 
-/* title text area*/
+.makeTask {
+
+}
+
 #title {
   font-family: Helvetica;
   font-size: 13px;
@@ -174,7 +161,6 @@ input {
   margin-top: 1%;
 }
 
-  /* task description text area*/
 #description {
   font-family: Helvetica;
   font-size: 12px;
@@ -194,10 +180,8 @@ input {
 
 /* END of Create Task View */
 
+
 /* Buttons ahoy! */
-
-/* Buttons */
-
 
 button {
   padding: 5px 10px;
@@ -217,12 +201,13 @@ button:hover {
 
 
 #loginBtn {
+  margin-top: 2%;
   margin-bottom: 2%;
 }
 
 
 #logOut {
-
+  margin right: 5px;
 }
 
 
