@@ -51,15 +51,23 @@ var TaskView = Backbone.View.extend({
 		this.remove();
 	}
  });
+
 var CreateTaskView = Backbone.View.extend({
 	render: function () {
 		var saveBtn = '<button id = "saveBtn"> Save Task </button>';
 		 //make text input fields which show default attributes upon load
 	  var titleInput = '<input id= "title" type="text" value="" />';
 		var descrInput = '<textarea id= "description"></textarea>';
+		var allUsers = "";
+		for (var i = 0; i < app.users.length; i++){
+			var userMod = app.users.get(i);
+			var user = userMod.get("username");
+			allUsers += "<option>" + user + "</option>";
+		}
 		//append text input titles, text input fields, and save button into a div into task-list
 		this.$el.html("Task Title" + "<div>" + titleInput + "</div>" +
 		 							"Description" + "<br><div>" + descrInput + "</div>" +
+									"<div> Assign to: <select id='assignee'>" + "<option> Nobody </option>" + allUsers + "</select>" +
 									"<br><div>" + saveBtn + "</div>");
 	},
 	initialize: function () {
@@ -73,12 +81,18 @@ var CreateTaskView = Backbone.View.extend({
 	 save: function() {
 		 var titleStr = $("#title").val();
 		 var descrStr = $("#description").val();
+		 var assigneeStr = $("#assignee").val();
+		 if (assigneeStr !== "Nobody") {
+			 var statusStr = "Assigned";
+		 } else {
+			 var statusStr = "Unassigned";
+		 }
 		 //Added if statement to specify correct creator if there's an active user
 		 if(activeUser) {
 			 this.collection.add({title: titleStr, description: descrStr,
-			 creator: activeUser.get("username")});
+			 creator: activeUser.get("username"), assignee: assigneeStr, status: statusStr});
 		 } else {
-		 this.collection.add({title: titleStr, description: descrStr});
+		 this.collection.add({title: titleStr, description: descrStr, assignee: assigneeStr, status: statusStr});
 	 	}
 		//clear text box
 		$("#title").val('');
