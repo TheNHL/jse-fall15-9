@@ -10,12 +10,13 @@ var activeUser;
 
 var TaskView = Backbone.View.extend({
 	render: function () {
+		console.log(this.model.get("id"));
 		var taskTitle = this.model.get("title");
 	  var taskDescription = this.model.get("description");
 	  var taskCreator = this.model.get("creator");
 	  var taskAssignee = this.model.get("assignee");
 	  var taskStatus = this.model.get("status");
-		var assignBtn = "<button id='assignBtn'>Assign it!</button>"
+		var assignBtn = "<button id='assignBtn'>Assign it!</button>";
 		var allUsers = "";
 		for (var i = 0; i < app.users.length; i++){
 			var userMod = app.users.get(i);
@@ -85,15 +86,21 @@ var CreateTaskView = Backbone.View.extend({
 		 if (assigneeStr !== "Nobody") {
 			 var statusStr = "Assigned";
 		 } else {
-			 var statusStr = "Unassigned";
+			 statusStr = "Unassigned";
 		 }
-		 //Added if statement to specify correct creator if there's an active user
-		 if(activeUser) {
-			 this.collection.add({title: titleStr, description: descrStr,
+		 //If the collection is empty, first id should be 0
+		 if(this.collection.models.length === 0) {
+			 var newTask = new TaskModel({id: 0, title: titleStr, description: descrStr,
 			 creator: activeUser.get("username"), assignee: assigneeStr, status: statusStr});
-		 } else {
-		 this.collection.add({title: titleStr, description: descrStr, assignee: assigneeStr, status: statusStr});
-	 	}
+		 }
+		 //Otherwise, add 1 to id
+			 else {
+				 var newTask = new TaskModel({id: app.tasks.models[app.tasks.models.length-1].id + 1, title: titleStr, description: descrStr,
+				 creator: activeUser.get("username"), assignee: assigneeStr, status: statusStr});
+
+			 }
+			 this.collection.add(newTask);
+			 newTask.save();
 		//clear text box
 		$("#title").val('');
 		$("#description").val('');
@@ -192,7 +199,7 @@ var UserView = Backbone.View.extend({
 		}
 	},
 	addView: function() {
-		if(this.hasView == false) {
+		if(this.hasView === false) {
 			var userTasksView = new UserTasksView({model: activeUser, collection: app.tasks,
 			userTasksCollection: this.collection});
 			userTasksView.render();
@@ -253,7 +260,7 @@ var LoginView = Backbone.View.extend({
 		var newUser = new UserModel({'username' : newUsername, 'password' : newUserPassword, 'id': (app.users.models[app.users.models.length-1].get('id') + 1)});
 	  app.users.add(newUser);
 		newUser.save();
-		$("#registration").html("User 'Person4' added! Please log in above.");
+		$("#registration").html("User '"+ newUser.get("username")+ "' added! Please log in above.");
 
 	},
 	authenticate: function() {
