@@ -120,7 +120,7 @@ var UnassignedTasksView = Backbone.View.extend({
 		if (currentStatus === "Unassigned") {
 			var view = new TaskView({model: newModel, collection: app.users});
 			view.render();
-			this.$el.append(view.$el);
+			this.$el.prepend(view.$el);
 		}
 	},
 
