@@ -11,7 +11,7 @@ body {
 }
 
 #app {
-  display: block;
+
 
 }
 
@@ -37,9 +37,8 @@ input {
 
 #login {
   width: 20%;
-  margin: 5%;
   padding: 5%;
-  border: pink 1px solid;
+
 }
 
  h2 {
@@ -76,80 +75,66 @@ input {
   padding-bottom: 10px;
   margin: 5px;
   padding: 1%;
-  position: fixed;
   text-align: center;
+  margin-right: auto;
+  margin-left: auto;
   top: 0;
   right: 0;
   width: 30%;
   display: block;
-  border: lightblue 1px solid;
-}
 
+}
 
 
 /* User View (top of pagewelcome, log out)*/
 
-/* User Tasks View */
-#createTasks {
-  width: 20%;
-  margin: 5%;
-  padding: 5%;
-  margin-right: 10px;
-  postion: fixed;
-  border: green 1px solid;
+/* Tasks for (Username) */
+#userTasks {
+  margin-top: 10%;
+  width: 30%;
+  padding: 1%;
+  top: 0;
+  right: 5px;
+  margin-bottom: 5%;
+  float: right;
+  overflow: scroll;
+
 }
 
 
-/* Unassigned Task View */
-/* Task View */
+/* User Tasks View */
 
 #task-list {
   width: 20%;
-  margin: 5%;
-  padding: 5%;
+  padding: 1%;
   padding-bottom: 5%;
-  border: orange 1px solid;
 
 }
 
 
 #unassignedTasks {
-  width: 20%;
-  margin: 5%;
-  padding: 5%;
-  border: purple 1px solid;
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 h4 {
+  margin-top: 20px;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0.5px;
 }
 
-/* Tasks for (Username) */
-#userTasks {
-  margin: 5%;
-  width: 20%;
-  padding: 5%;
-  margin-bottom: 5%;
-  float: bottom;
-  border: red 1px solid;
 
-}
-
-.yrTasks {
-  font-family: Helvetica;
-  font-size: 16px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-}
 
 
 /* Create Task View */
-
-.makeTask {
-
+#createTasks {
+  width: 200px;
+  float: top;
 }
+
 
 #title {
   font-family: Helvetica;
@@ -169,13 +154,52 @@ h4 {
   width: 200px;
   height: 100px;
   padding: 5px;
-  margin-bottom: 2%;
+  margin-bottom: 5%;
   margin-top: 1%;
   border-radius: 3px;
   border-top: #777 1px solid;
   border-right: #777 1px solid;
   border-bottom: #999 1px solid;
   border-left: #999 1px solid;
+}
+
+#assignTxt {
+
+}
+
+select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+          /*width: 85px;
+          position:relative; */
+          height: 20px;
+          margin-bottom: 20px;
+          padding-left: 10px;
+          margin-left: 30px;
+          background-color: white;
+          border: 2px solid #bbb;
+          border-radius: 3px;
+          color: #555;
+          font-weight: 300;
+          font-size: 12px;
+
+
+}
+
+option {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+         appearance: none;
+  /**/
+  width: 80px;
+  margin-left: 5px;
+  padding: 0px 2px 1px;
+  background-color: white;
+  border: 3px solid #bbb;
+  border-radius: 3px;
+  color: #555;
+  min-height: 1.5em;
 }
 
 /* END of Create Task View */
@@ -207,7 +231,8 @@ button:hover {
 
 
 #logOut {
-  margin right: 5px;
+  margin left: 50px;
+
 }
 
 
