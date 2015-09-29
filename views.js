@@ -230,16 +230,28 @@ var LoginView = Backbone.View.extend({
 		var loginBtn = "<button id='loginBtn'>Log In</button>";
 		this.$el.html("<h2>Log In</h2>" + "Username <input id='userInput'></input>" +
 		"Password <input type='password' id='passInput'></input>" + loginBtn);
+		//Registration
+		this.$el.append("<div id='registration'><h2>Register</h2>	" +"<p>Username" + "<br><input id='newUsername'></input>" + "<p>Password</p><input type='password' id='newUserPassword'></input>" + "<button id='newUserBtn'>Register</button></div>");
 	},
 	events: {
 		"click #loginBtn": "authenticate",
-		"keypress input" : "loginOnEnter"
+		"keypress input" : "loginOnEnter",
+		"click #newUserBtn" : "register"
 	},
 
 	loginOnEnter: function (e){
 			if(e.keyCode == 13) {
 					this.authenticate();
 			}
+	},
+	register: function() {
+	  //Can't figure out how to get access to the database object
+	//	database.fetch();
+	  var newUsername = $("#newUsername").val();
+	  var newUserPassword = $("#newUserPassword").val();
+	  console.log("Added new user %s", newUsername);
+	  app.users.add({'username' : newUsername, 'password' : newUserPassword, 'id': (app.users.models[app.users.models.length-1].get('id') + 1)});
+		$("#registration").html("User 'Person4' added! Please log in above.");
 	},
 	authenticate: function() {
 		var userInput = $("#userInput").val(); //Grab the user input
