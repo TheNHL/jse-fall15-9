@@ -23,9 +23,9 @@ var TaskView = Backbone.View.extend({
 			allUsers += "<option>" + user + "</option>";
 		}
     this.$el.html( "</div> <div><h4>" + taskTitle + "</h4>" + "Description: " + taskDescription +
-									 "<br> Added By: " + taskCreator + "<br>Status: " + taskStatus + "</div>" );
+									 "<br> Added By: " + taskCreator + "<br>Status: " + taskStatus + "</div><br>" );
 		if(taskStatus === "Unassigned") {
-			this.$el.append("Assign to: <select id='newAssignee'>" + allUsers + "</select>" + assignBtn);
+			this.$el.append("Assign to:" + " <select id='newAssignee'>" + allUsers + "</select>" + "<p>" + assignBtn);
 		}
 
 	},
@@ -65,9 +65,9 @@ var CreateTaskView = Backbone.View.extend({
 			allUsers += "<option>" + user + "</option>";
 		}
 		//append text input titles, text input fields, and save button into a div into task-list
-		this.$el.html("<p class='makeTask'>Create A Task</p>" + "Task Title" + "<div>" + titleInput + "</div>" +
+		this.$el.html('<h3>Create A Task </h3>' + "Task Title" + "<div>" + titleInput + "</div>" +
 		 							"Description" + "<br><div>" + descrInput + "</div>" +
-									"<div> Assign to: <select id='assignee'>" + "<option> Nobody </option>" + allUsers + "</select>" +
+									"<div id='assignTxt'>Assign to:" + "     " + "<select id='assignee'>" + "<option>Choose...</option>" + allUsers + "</select>" +
 									"<br><div>" + saveBtn + "</div>");
 	},
 	initialize: function () {
@@ -82,7 +82,7 @@ var CreateTaskView = Backbone.View.extend({
 		 var titleStr = $("#title").val();
 		 var descrStr = $("#description").val();
 		 var assigneeStr = $("#assignee").val();
-		 if (assigneeStr !== "Nobody") {
+		 if (assigneeStr !== "Choose...") {
 			 var statusStr = "Assigned";
 		 } else {
 			 var statusStr = "Unassigned";
@@ -128,11 +128,11 @@ var UserTasksView = Backbone.View.extend({
 
 	render: function() {
 
-		this.$el.html('')
-		$("#userTasks").html("<p class= 'yrTasks'>Tasks for " + this.model.get("username") +
-		":</p>");
 
-		$("#userTasks").html("<h3>Tasks for " + this.model.get("username") +
+/*Formerly:
+$("#userTasks").html("<h3>Tasks for " + this.model.get("username") +
+":</h3>");*/
+		$("#userTasks").html("<h3>Your Tasks " +
 		":</h3>");
 
 		//Get all the tasks associated with a user
@@ -176,7 +176,7 @@ var UserView = Backbone.View.extend({
 	hasView: false,
 
 	render: function() {
-		this.$el.html("<p>Welcome, "+this.model.get('username'   )+ "        " + "<button id='logOut'>Log Out</button>");
+		this.$el.html("<p>Welcome, "+this.model.get('username'   )+ "           " + "   <button id='logOut'>Log Out</button>");
 		if (this.collection.length !== 0 && this.hasView === false)	this.addView();
 
 	},
@@ -222,7 +222,7 @@ var UserView = Backbone.View.extend({
 // jquery add text if username/ pword Incorrect
 // remove when click log in button (click or enter)
 // stop direct to text "incorrect"
-//clear input field (make empty string)
+
 // selector for text color
 
 var LoginView = Backbone.View.extend({
