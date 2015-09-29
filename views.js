@@ -97,7 +97,6 @@ var CreateTaskView = Backbone.View.extend({
 			 else {
 				 var newTask = new TaskModel({id: app.tasks.models[app.tasks.models.length-1].id + 1, title: titleStr, description: descrStr,
 				 creator: activeUser.get("username"), assignee: assigneeStr, status: statusStr});
-
 			 }
 			 this.collection.add(newTask);
 			 newTask.save();
