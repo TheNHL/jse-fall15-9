@@ -250,8 +250,11 @@ var LoginView = Backbone.View.extend({
 	  var newUsername = $("#newUsername").val();
 	  var newUserPassword = $("#newUserPassword").val();
 	  console.log("Added new user %s", newUsername);
-	  app.users.add({'username' : newUsername, 'password' : newUserPassword, 'id': (app.users.models[app.users.models.length-1].get('id') + 1)});
+		var newUser = new UserModel({'username' : newUsername, 'password' : newUserPassword, 'id': (app.users.models[app.users.models.length-1].get('id') + 1)});
+	  app.users.add(newUser);
+		newUser.save();
 		$("#registration").html("User 'Person4' added! Please log in above.");
+
 	},
 	authenticate: function() {
 		var userInput = $("#userInput").val(); //Grab the user input
