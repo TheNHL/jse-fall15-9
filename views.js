@@ -137,8 +137,7 @@ var UserTasksView = Backbone.View.extend({
 /*Formerly:
 $("#userTasks").html("<h3>Tasks for " + this.model.get("username") +
 ":</h3>");*/
-		$("#userTasks").html("<h3>Your Tasks " +
-		":</h3>");
+		$("#userTasks").html("<h3>Your Tasks :</h3>");
 
 		//Get all the tasks associated with a user
 		var userCreatedTasks = this.collection.where({creator: activeUser.get("username")});
@@ -156,13 +155,17 @@ $("#userTasks").html("<h3>Tasks for " + this.model.get("username") +
 	},
 
 	appendNew: function(newModel) {
-		var taskTitle = newModel.get("title");
+		var newTask = new TaskView({model: newModel, collection: app.users});
+		/*var taskTitle = newModel.get("title");
 		var taskDescription = newModel.get("description");
 		var taskCreator = newModel.get("creator");
 		var taskAssignee = newModel.get("assignee");
 		var taskStatus = newModel.get("status");
 		$("#userTasks").append( "</div> <div><h4>" + taskTitle + "</h4>" + "Description: " + taskDescription +
-									 "<br> Added By: " + taskCreator + "<br>Status: " + taskStatus + "<br>Assigned to: " + taskAssignee + "</div>" );
+									 "<br> Added By: " + taskCreator + "<br>Status: " + taskStatus + "<br>Assigned to: " + taskAssignee + "</div>" );*/
+		newTask.render();
+		$("#userTasks").append(newTask.$el);
+		console.log("Trying to append newTask!");
 	},
 
 	initialize: function() {
