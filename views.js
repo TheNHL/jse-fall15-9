@@ -68,7 +68,7 @@ var CreateTaskView = Backbone.View.extend({
 		//append text input titles, text input fields, and save button into a div into task-list
 		this.$el.html('<h3>Create A Task </h3>' + "Task Title" + "<div>" + titleInput + "</div>" +
 		 							"Description" + "<br><div>" + descrInput + "</div>" +
-									"<div id='assignTxt'>Assign to:" + "     " + "<select id='assignee'>" + "<option>Choose...</option>" + allUsers + "</select>" +
+									"<div id='assignTxt'>Assign to:" + "     " + "<select id='assignee'>" + "<option>Nobody</option>" + allUsers + "</select>" +
 									"<br><div>" + saveBtn + "</div>");
 	},
 	initialize: function () {
@@ -83,7 +83,7 @@ var CreateTaskView = Backbone.View.extend({
 		 var titleStr = $("#title").val();
 		 var descrStr = $("#description").val();
 		 var assigneeStr = $("#assignee").val();
-		 if (assigneeStr !== "Choose...") {
+		 if (assigneeStr !== "Nobody") {
 			 var statusStr = "Assigned";
 		 } else {
 			 statusStr = "Unassigned";
@@ -100,9 +100,8 @@ var CreateTaskView = Backbone.View.extend({
 			 }
 			 this.collection.add(newTask);
 			 newTask.save();
-		//clear text box
-		$("#title").val('');
-		$("#description").val('');
+		 //Re-render to clear inputs
+			 this.render();
 },
 
 });
